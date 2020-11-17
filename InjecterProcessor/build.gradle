@@ -1,14 +1,21 @@
 apply plugin: 'java'
 
-dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':InjecterAnnotation')
-    compile 'com.google.auto:auto-common:0.6'
-    compile 'com.google.auto.service:auto-service:1.0-rc2'
-    compile 'com.squareup:javapoet:1.7.0'
 
-    sourceCompatibility = "1.7"
-    targetCompatibility = "1.7"
+compileJava {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
+
+dependencies {
+
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':InjecterAnnotation')
+
+    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc7'
+    compileOnly 'com.google.auto.service:auto-service-annotations:1.0-rc7'
+    implementation 'com.squareup:javapoet:1.8.0'
+    implementation 'com.google.auto:auto-common:0.11'
+
 }
 
 

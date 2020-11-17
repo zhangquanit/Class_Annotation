@@ -16,6 +16,7 @@ public class MainActivity extends Activity {
         Injecter.bind(this);
         textView.setText("我通过BindView注解生成的");
     }
+
     @BindView(R.id.textview)
     TextView textView;
 }

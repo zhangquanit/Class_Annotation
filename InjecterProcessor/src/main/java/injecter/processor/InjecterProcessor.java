@@ -147,14 +147,15 @@ public final class InjecterProcessor extends AbstractProcessor{
             TypeElement enclosingElement = item.getKey();
             String packageName = getPackageName(enclosingElement);
             ClassName typeClassName = ClassName.bestGuess(getClassName(enclosingElement, packageName));
-            TypeSpec.Builder result = TypeSpec.classBuilder(getClassName(enclosingElement, packageName) + BINDING_CLASS_SUFFIX)
+            TypeSpec.Builder result = TypeSpec
+                    .classBuilder(getClassName(enclosingElement, packageName) + BINDING_CLASS_SUFFIX)
                     .addModifiers(Modifier.PUBLIC) //public
                     .addTypeVariable(TypeVariableName.get("T", typeClassName)) //泛型变量
                     .addSuperinterface(ParameterizedTypeName.get(VIEW_BINDER, typeClassName));//实现的接口
-            result.addMethod(createBindMethod(list, typeClassName));
+            result.addMethod(createBindMethod(list, typeClassName)); //添加方法
             try {
                 JavaFile.builder(packageName, result.build())
-                        .addFileComment(" This codes are generated automatically. Do not modify!")
+                        .addFileComment(" This codes are generated automatically. Do not modify!") //添加注释
                         .build().writeTo(filer);
             } catch (IOException e) {
                 e.printStackTrace();

@@ -1,13 +1,12 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.3"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.annotation"
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
     }
@@ -17,11 +16,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':Injecter')
-    //apt
-    apt project(':InjecterProcessor')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':Injecter')
+
+    annotationProcessor project(':InjecterProcessor')
 }
